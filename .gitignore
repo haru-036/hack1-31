@@ -43,3 +43,6 @@ next-env.d.ts
 settings.json
 
 mcp.json
+
+.open-next/
+.wrangler/
