@@ -1,3 +1,14 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 export default function Home() {
-	return <div>Hello World</div>;
+	return (
+		<div className="bg-neutral-50 min-h-screen">
+			<div className="max-w-7xl mx-auto px-10 py-4">
+				<Button asChild>
+					<Link href="/create">作る</Link>
+				</Button>
+			</div>
+		</div>
+	);
 }
