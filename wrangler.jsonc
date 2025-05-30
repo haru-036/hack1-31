@@ -6,5 +6,8 @@
 	"assets": {
 		"directory": ".open-next/assets",
 		"binding": "ASSETS"
+	},
+	"observability": {
+		"enabled": true
 	}
 }
