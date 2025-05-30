@@ -10,7 +10,8 @@
 		"format": "biome format --write",
 		"check": "biome check",
 		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-		"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+		"build:cf": "opennextjs-cloudflare build",
+		"deploy": "opennextjs-cloudflare deploy",
 		"cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
 	},
 	"dependencies": {
