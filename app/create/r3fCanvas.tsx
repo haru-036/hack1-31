@@ -52,7 +52,7 @@ export const Building = ({
 	size,
 	color,
 	emoji,
-	position,
+	position = [0, 0, 0],
 }: {
 	size: [number, number, number];
 	color: string;
@@ -60,13 +60,13 @@ export const Building = ({
 	position?: [number, number, number];
 }) => {
 	return (
-		<group position={position}>
+		<group position={[position[0], position[1] - 0.05, position[2]]}>
 			<mesh position={[0, 0, 0]} castShadow receiveShadow>
-				<boxGeometry args={size} />
+				<boxGeometry args={[size[0] - 0.1, size[1] - 0.1, size[2] - 0.1]} />
 				<meshLambertMaterial color={color} />
 			</mesh>
 			<Text
-				position={[0, 0, size[2] / 2 + 0.01]}
+				position={[0, 0, size[2] / 2 - 0.04]}
 				rotation={[0, 0, 0]}
 				fontSize={0.5}
 				color="black"
