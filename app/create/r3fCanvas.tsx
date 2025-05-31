@@ -32,7 +32,7 @@ export default function R3fCanvas() {
 	return (
 		<>
 			{data ? (
-				<Canvas>
+				<Canvas shadows>
 					<ambientLight intensity={1.6} />
 					<directionalLight position={[5, 10, 5]} intensity={2} castShadow />
 
@@ -48,18 +48,20 @@ export default function R3fCanvas() {
 	);
 }
 
-const Building = ({
+export const Building = ({
 	size,
 	color,
 	emoji,
+	position,
 }: {
 	size: [number, number, number];
 	color: string;
 	emoji: string;
+	position?: [number, number, number];
 }) => {
 	return (
-		<group>
-			<mesh position={[0, 0, 0]}>
+		<group position={position}>
+			<mesh position={[0, 0, 0]} castShadow receiveShadow>
 				<boxGeometry args={size} />
 				<meshLambertMaterial color={color} />
 			</mesh>
