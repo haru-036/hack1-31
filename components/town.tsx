@@ -2,6 +2,7 @@
 import { Building } from "@/app/create/r3fCanvas";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { useState } from "react";
 
 // レベルごとの土地拡張パターン
 const LAND_EXPANSION = {
@@ -34,7 +35,7 @@ const LAND_EXPANSION = {
 	],
 };
 
-export default function Town() {
+export default function Town({ setMode }: { setMode?: boolean }) {
 	return (
 		<Canvas
 			className="w-full h-full grow rounded-2xl"
@@ -44,7 +45,7 @@ export default function Town() {
 			<ambientLight intensity={1.6} />
 			<directionalLight position={[5, 10, 5]} intensity={2} castShadow />
 
-			<GroundGrid />
+			<GroundGrid setMode={setMode} />
 
 			<fog attach="fog" args={["#fff", 10, 100]} />
 
@@ -72,18 +73,31 @@ export default function Town() {
 	);
 }
 
-function GroundGrid({ size = 10 }) {
+function GroundGrid({
+	size = 10,
+	setMode,
+}: { size?: number; setMode?: boolean }) {
 	const cells = [];
 	const ownedLand = LAND_EXPANSION[4];
+	const [hover, setHover] = useState<[number, number] | null>(null);
+	const [selected, setSelected] = useState<[number, number] | null>(null);
 
 	for (let x = 0; x < size; x++) {
 		for (let z = 0; z < size; z++) {
 			cells.push(
+				// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 				<mesh
 					key={`${x}-${z}`}
 					position={[x - size / 2, 0, z - size / 2]}
 					rotation={[Math.PI / -2, 0, 0]}
 					receiveShadow
+					onPointerOver={() => setHover([x, z])}
+					onPointerOut={() => setHover(null)}
+					onClick={() => {
+						if (setMode) {
+							setSelected([x, z]);
+						}
+					}}
 				>
 					<planeGeometry args={[0.98, 0.98]} />
 					<meshLambertMaterial
@@ -91,7 +105,11 @@ function GroundGrid({ size = 10 }) {
 							ownedLand.some(
 								([lx, lz]) => lx === x - size / 2 && lz === z - size / 2,
 							)
-								? "#8FBC8F"
+								? selected?.[0] === x && selected?.[1] === z && setMode
+									? "#3C82F6"
+									: hover?.[0] === x && hover?.[1] === z && setMode
+										? "#AEE882"
+										: "#8FBC8F"
 								: "#f8d19f"
 						}
 					/>

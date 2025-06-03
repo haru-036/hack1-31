@@ -45,7 +45,9 @@ export default async function Create() {
 
 						<R3fCanvas />
 
-						<Button className="w-fit self-end font-bold">できた！</Button>
+						<Button asChild className="w-fit self-end font-bold">
+							<Link href="/create/set">できた！</Link>
+						</Button>
 					</div>
 				</div>
 			</div>

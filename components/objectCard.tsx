@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,15 +29,17 @@ export default function ObjectCard({
 	image,
 	masu,
 	possible,
+	className,
 }: {
 	name: string;
 	difficulty: "easy" | "normal" | "hard";
 	image?: string;
 	masu: number;
 	possible?: boolean;
+	className?: string;
 }) {
 	return (
-		<div className="bg-white rounded-2xl p-2.5 h-fit relative">
+		<div className={cn("bg-white rounded-2xl p-2.5 h-fit relative", className)}>
 			{!possible && (
 				<div className="absolute inset-0 bg-black/60 rounded-2xl flex items-center justify-center">
 					<div className="text-white font-bold">レベルが足りないよ</div>
