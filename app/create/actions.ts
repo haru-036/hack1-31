@@ -4,7 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 // APIキーを環境変数から取得
 const API_KEY = process.env.GEMINI_API_KEY;
 if (!API_KEY) {
-	throw new Error("GEMINI_API_KEY is not set in environment variables.");
+  throw new Error("GEMINI_API_KEY is not set in environment variables.");
 }
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 
@@ -38,36 +38,50 @@ const systemInstructionText = `あなたは子ども向けの「まちづくり�
 では次のユーザーのリクエストに応えてください。`;
 
 export async function create3DData(message: string) {
-	const response = await ai.models.generateContent({
-		model: "gemini-2.0-flash",
-		contents: message,
-		config: {
-			systemInstruction: systemInstructionText,
-			responseMimeType: "application/json",
-		},
-	});
+  const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash",
+    contents: message,
+    config: {
+      systemInstruction: systemInstructionText,
+      responseMimeType: "application/json",
+    },
+  });
 
-	const data = JSON.parse(response.text ?? "{}");
-	return data;
+  const data = JSON.parse(response.text ?? "{}");
+  return data;
 }
 
 const chat = ai.chats.create({
-	model: "gemini-2.0-flash",
-	config: {
-		systemInstruction: systemInstructionText,
-		responseMimeType: "application/json",
-	},
+  model: "gemini-2.0-flash",
+  config: {
+    systemInstruction: systemInstructionText,
+    responseMimeType: "application/json",
+  },
 });
 
 export async function create3DChat(message: string) {
-	const response = await chat.sendMessage({
-		message: message,
-	});
-	const data = JSON.parse(response.text ?? "{}");
-	return data;
+  try {
+    const response = await chat.sendMessage({
+      message: message,
+    });
+    const data = JSON.parse(response.text ?? "{}");
+    return data;
+  } catch (error) {
+    console.error(error);
+    return {
+      error: "Failed to create 3D data",
+    };
+  }
 }
 
 export async function getChatHistory() {
-	const history = chat.getHistory();
-	return history;
+  try {
+    const history = chat.getHistory();
+    return history;
+  } catch (error) {
+    console.error(error);
+    return {
+      error: "Failed to get chat history",
+    };
+  }
 }

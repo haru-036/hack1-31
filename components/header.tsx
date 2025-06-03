@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function Header() {
 	return (
 		<header className="flex justify-between items-center max-w-7xl lg:container mx-auto px-10 py-3.5">
-			<div className="font-bold">LOGO</div>
+			<div className="font-black text-lg">BuildCha</div>
 			<div className="flex items-center gap-2">
 				<Avatar className="w-7 h-7">
 					<AvatarImage src="https://api.dicebear.com/9.x/fun-emoji/svg" />
