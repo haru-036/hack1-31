@@ -7,7 +7,7 @@ import R3fCanvas from "./r3fCanvas";
 
 export default async function Create() {
 	return (
-		<div className="bg-neutral-100 h-[calc(100vh-52px)] flex flex-col">
+		<div className="bg-neutral-100 h-[calc(100vh-56px)] flex flex-col">
 			<div className="xl:container max-w-7xl mx-auto px-10 py-10 w-full h-full grow flex flex-col">
 				<div className="flex items-center gap-2">
 					<Button variant={"ghost"} size={"icon"} asChild>

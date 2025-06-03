@@ -23,7 +23,9 @@ export default function Chat() {
 			console.log(data);
 			setObjectData(data);
 			const historyData = await getChatHistory();
-			setHistory(historyData);
+			if (Array.isArray(historyData)) {
+				setHistory(historyData);
+			}
 			setMessage("");
 		});
 	};
