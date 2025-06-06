@@ -1,10 +1,10 @@
+import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 
-const DifficultyBadge = ({
+export const DifficultyBadge = ({
 	difficulty,
 }: { difficulty: "easy" | "normal" | "hard" }) => {
 	let label: string;
@@ -28,15 +28,28 @@ export default function ObjectCard({
 	image,
 	masu,
 	possible,
+	className,
+	id,
 }: {
 	name: string;
 	difficulty: "easy" | "normal" | "hard";
 	image?: string;
 	masu: number;
 	possible?: boolean;
+	className?: string;
+	id: string;
 }) {
 	return (
-		<div className="bg-white rounded-2xl p-2.5 h-fit relative">
+		<Link
+			className={cn(
+				"bg-white rounded-2xl p-2.5 h-fit relative transition-shadow",
+				possible
+					? " hover:cursor-pointer hover:outline-4 hover:outline-primary/50 hover:scale-105 transition-all"
+					: "shadow-none",
+				className,
+			)}
+			href={possible ? `/${id}` : "/"}
+		>
 			{!possible && (
 				<div className="absolute inset-0 bg-black/60 rounded-2xl flex items-center justify-center">
 					<div className="text-white font-bold">レベルが足りないよ</div>
@@ -44,28 +57,20 @@ export default function ObjectCard({
 			)}
 			<div className="flex items-center justify-between gap-2">
 				<DifficultyBadge difficulty={difficulty} />
-				<p className="text-xs font-bold">{masu}マス</p>
+				{/* <p className="text-xs font-bold">{masu}マス</p> */}
 			</div>
 			<div className="w-full pt-3">
 				<Image
-					src={"/house.png"}
+					src={image || "/house.png"}
 					alt="house"
 					className="object-cover mx-auto"
 					width={84}
 					height={84}
 				/>
 			</div>
-			<div>
-				<Button
-					asChild
-					variant={"ghost"}
-					className="text-base font-bold text-muted-foreground"
-				>
-					<Link href={"/create"}>
-						{name} <ChevronRight className="size-6" />
-					</Link>
-				</Button>
+			<div className="flex items-center gap-2 py-2 px-1 text-base font-bold text-muted-foreground">
+				{name} <ChevronRight className="size-6" />
 			</div>
-		</div>
+		</Link>
 	);
 }

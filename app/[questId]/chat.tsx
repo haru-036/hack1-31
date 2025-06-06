@@ -1,4 +1,5 @@
 "use client";
+import { UserIdContext } from "@/components/appWrapper";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
@@ -6,7 +7,7 @@ import { useObjectStore } from "@/lib/store";
 import type { Content } from "@google/genai";
 import { ArrowUp } from "lucide-react";
 import Image from "next/image";
-import { useState, useTransition } from "react";
+import { useContext, useState, useTransition } from "react";
 import { create3DChat, getChatHistory } from "./actions";
 
 export default function Chat() {
@@ -14,6 +15,8 @@ export default function Chat() {
 	const setObjectData = useObjectStore((state) => state.setObjectData);
 	const [isPending, startTransition] = useTransition();
 	const [history, setHistory] = useState<Content[]>([]);
+	const userId = useContext(UserIdContext);
+	if (!userId) return null;
 
 	const handleSubmit = async () => {
 		if (message.trim() === "") return;
@@ -22,6 +25,7 @@ export default function Chat() {
 			const data = await create3DChat(message);
 			console.log(data);
 			setObjectData(data);
+			// createObject(userId, data);
 			const historyData = await getChatHistory();
 			if (Array.isArray(historyData)) {
 				setHistory(historyData);
@@ -41,7 +45,7 @@ export default function Chat() {
 							width={66}
 							height={66}
 						/>
-						<div>家をつくってみよう！ どんな形にしたい？</div>
+						<div>何を作るのかな？どんな形にしたい？</div>
 					</div>
 
 					{history.map((item, index) =>
@@ -56,9 +60,7 @@ export default function Chat() {
 									width={66}
 									height={66}
 								/>
-								<div>
-									{JSON.parse(item.parts?.[0]?.text ?? "{}").description}
-								</div>
+								<div>{JSON.parse(item.parts?.[0]?.text ?? "{}").chat}</div>
 							</div>
 						) : (
 							<div
