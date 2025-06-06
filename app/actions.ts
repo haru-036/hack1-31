@@ -1,7 +1,9 @@
 "use server";
 
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 import type { BuildingPartData } from "./[questId]/r3fCanvas";
+
+const supabase = createClient();
 
 export async function createUser(userId: string) {
 	const { data, error } = await supabase.from("users").insert({

@@ -1,6 +1,6 @@
 "use client";
 
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 import { useContext, useEffect, useState } from "react";
 import { UserIdContext } from "./appWrapper";
 
@@ -11,6 +11,7 @@ export default function BuildingsCount() {
 	useEffect(() => {
 		const fetchData = async () => {
 			if (userId) {
+				const supabase = createClient();
 				const { count, error } = await supabase
 					.from("complex_objects")
 					.select("*", { count: "exact", head: true })

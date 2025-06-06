@@ -1,7 +1,7 @@
 "use client";
 import { type BuildingPartData, Buildings } from "@/app/[questId]/r3fCanvas";
 import { useObjectStore } from "@/lib/store";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useParams } from "next/navigation";
@@ -43,6 +43,7 @@ async function getObjectParts(
 	userId: string,
 	questId: string,
 ): Promise<BuildingPartData | null> {
+	const supabase = createClient();
 	const { data, error } = await supabase
 		.from("complex_objects")
 		.select("*")
@@ -58,6 +59,7 @@ async function getObjectParts(
 }
 
 async function getMyTown(userId: string): Promise<BuildingPartData[] | null> {
+	const supabase = createClient();
 	const { data, error } = await supabase
 		.from("complex_objects")
 		.select("*")
