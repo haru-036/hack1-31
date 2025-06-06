@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import UserIcon from "./userIcon";
 
 export default function Header() {
 	return (
@@ -8,10 +8,7 @@ export default function Header() {
 				<Link href="/">BuildCha</Link>
 			</div>
 			<div className="flex items-center gap-2">
-				<Avatar className="w-7 h-7">
-					<AvatarImage src="https://api.dicebear.com/9.x/fun-emoji/svg" />
-					<AvatarFallback>CN</AvatarFallback>
-				</Avatar>
+				<UserIcon />
 				{/* <p className="text-sm text-neutral-700">田中太郎</p> */}
 			</div>
 		</header>

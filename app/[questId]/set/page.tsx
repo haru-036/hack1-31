@@ -1,16 +1,23 @@
+import SetedButton from "@/components/setedButton";
 import Town from "@/components/town";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SetObject() {
+export default async function SetObject({
+	params,
+}: {
+	params: Promise<{ questId: string }>;
+}) {
+	const { questId } = await params;
+
 	return (
 		<div className="bg-neutral-100 h-[calc(100vh-56px)] flex flex-col">
 			<div className="xl:container max-w-7xl mx-auto px-10 py-10 w-full h-full grow flex flex-col">
 				<div className="flex items-center gap-2">
 					<Button variant={"ghost"} size={"icon"} asChild>
-						<Link href="/create">
+						<Link href={`/${questId}`}>
 							<ChevronLeft className="size-6" />
 						</Link>
 					</Button>
@@ -31,9 +38,9 @@ export default function SetObject() {
 							</h3>
 						</div>
 						<Town setMode />
-						<Button className="w-fit justify-self-end mt-4" size={"lg"}>
-							<Link href="/create/complete">決まった！</Link>
-						</Button>
+						<div className="w-full flex justify-end">
+							<SetedButton />
+						</div>
 					</div>
 				</div>
 			</div>

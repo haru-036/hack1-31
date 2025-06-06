@@ -1,9 +1,9 @@
-import type { Data } from "@/app/create/r3fCanvas";
+import type { BuildingPartData } from "@/app/[questId]/r3fCanvas";
 import { create } from "zustand";
 
 type ObjectStore = {
-	objectData: Data | null;
-	setObjectData: (data: Data) => void;
+	objectData: BuildingPartData | null;
+	setObjectData: (data: BuildingPartData) => void;
 };
 
 export const useObjectStore = create<ObjectStore>((set) => ({
