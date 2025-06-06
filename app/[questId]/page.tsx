@@ -1,7 +1,7 @@
 import CreatedButton from "@/components/createdButton";
 import { DifficultyBadge } from "@/components/objectCard";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +14,7 @@ export default async function Create({
 	params: Promise<{ questId: string }>;
 }) {
 	const { questId } = await params;
-
+	const supabase = createClient();
 	const { data: quest } = await supabase
 		.from("quests")
 		.select("*")

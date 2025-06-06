@@ -1,12 +1,13 @@
 import ObjectCard from "@/components/objectCard";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 import { Home } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function CompletePage() {
+	const supabase = createClient();
 	const { data: quests } = await supabase
 		.from("quests")
 		.select("*")

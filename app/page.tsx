@@ -1,10 +1,11 @@
 import BuildingsCount from "@/components/buildingsCount";
 import ObjectCard from "@/components/objectCard";
 import Town from "@/components/town";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 
 export default async function Home() {
+	const supabase = createClient();
 	const { data: quests } = await supabase
 		.from("quests")
 		.select("*")
