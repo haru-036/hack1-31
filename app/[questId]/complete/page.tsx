@@ -1,11 +1,18 @@
 import ObjectCard from "@/components/objectCard";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { supabase } from "@/lib/supabase";
 import { Home } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CompletePage() {
+export default async function CompletePage() {
+	const { data: quests } = await supabase
+		.from("quests")
+		.select("*")
+		.order("difficulty", { ascending: true })
+		.limit(3);
+
 	return (
 		<div className="w-full min-h-[calc(100vh-56px)] grid place-items-center bg-neutral-50 py-6">
 			<div className="max-w-6xl grid w-full px-18 py-16 rounded-3xl gap-16 bg-blue-50 shadow-lg shadow-black/5">
@@ -52,9 +59,17 @@ export default function CompletePage() {
 				<div className="grid gap-4">
 					<h3 className="font-bold text-2xl">次はどれをつくる？</h3>
 					<div className="grid grid-cols-3 gap-4">
-						<ObjectCard name="テラス" difficulty="easy" masu={1} possible />
-						<ObjectCard name="テラス" difficulty="normal" masu={1} possible />
-						<ObjectCard name="テラス" difficulty="hard" masu={1} possible />
+						{quests?.map((quest) => (
+							<ObjectCard
+								key={quest.id}
+								name={quest.name}
+								difficulty={quest.difficulty}
+								masu={quest.masu}
+								possible
+								image={quest.image_url}
+								id={quest.id}
+							/>
+						))}
 					</div>
 				</div>
 			</div>
