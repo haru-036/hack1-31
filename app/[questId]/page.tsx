@@ -43,10 +43,12 @@ export default async function Create({
 				<div className="pt-6 grid grid-cols-5 grid-rows-5 gap-x-8 xl:gap-x-11 gap-y-8 grow h-[calc(100%-100px)]">
 					<div className="bg-white rounded-xl py-6 px-6 col-span-3 flex flex-col row-span-5 h-full">
 						<h3 className="font-bold text-xl">チャット</h3>
-						{/* <div className="w-full p-4 bg-neutral-100 rounded-lg mt-3 text-sm space-y-2.5">
-							<h4 className="font-bold">達成条件</h4>
-							<p>家という単語を使わない</p>
-						</div> */}
+						{quest.challenge && (
+							<div className="w-full p-4 bg-neutral-100 rounded-lg mt-3 text-sm space-y-2.5">
+								<h4 className="font-bold">達成条件</h4>
+								<p>{quest.challenge}</p>
+							</div>
+						)}
 						<Chat />
 					</div>
 

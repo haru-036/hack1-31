@@ -16,8 +16,12 @@ export default function SetedButton() {
 
 	const handleClick = () => {
 		startTransition(async () => {
-			if (!data.position) return;
-			await updateObjectParts(userId, questId.toString(), data.position);
+			if (!data.BuildingPartData.position) return;
+			await updateObjectParts(
+				userId,
+				questId.toString(),
+				data.BuildingPartData.position,
+			);
 			router.push(`/${questId}/complete`);
 		});
 	};
