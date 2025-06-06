@@ -3,6 +3,7 @@ import { UserIdContext } from "@/components/appWrapper";
 import { useObjectStore } from "@/lib/store";
 import { OrbitControls, Text } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { useParams } from "next/navigation";
 import { useContext, useMemo } from "react";
 import * as THREE from "three";
 
@@ -101,15 +102,20 @@ export function Buildings({
 export default function R3fCanvas() {
 	const data = useObjectStore((state) => state.objectData);
 	const userId = useContext(UserIdContext);
+	const { questId } = useParams<{ questId: string }>();
+	const setObjectData = useObjectStore((state) => state.setObjectData);
 
 	if (!userId) return null;
 
 	const Object3D = useMemo(() => {
-		if (!data) return null;
+		if (!data || !data.BuildingPartData || data.questId !== questId) {
+			setObjectData(null);
+			return null;
+		}
 
 		// 例: JSON内のオブジェクト定義を基に描画
-		return <Buildings buildingData={data} />;
-	}, [data]);
+		return <Buildings buildingData={data.BuildingPartData} />;
+	}, [data, questId, setObjectData]);
 
 	return (
 		<>

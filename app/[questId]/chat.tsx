@@ -7,6 +7,7 @@ import { useObjectStore } from "@/lib/store";
 import type { Content } from "@google/genai";
 import { ArrowUp } from "lucide-react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { useContext, useState, useTransition } from "react";
 import { create3DChat, getChatHistory } from "./actions";
 
@@ -16,6 +17,7 @@ export default function Chat() {
 	const [isPending, startTransition] = useTransition();
 	const [history, setHistory] = useState<Content[]>([]);
 	const userId = useContext(UserIdContext);
+	const { questId } = useParams<{ questId: string }>();
 	if (!userId) return null;
 
 	const handleSubmit = async () => {
@@ -24,7 +26,7 @@ export default function Chat() {
 		startTransition(async () => {
 			const data = await create3DChat(message);
 			console.log(data);
-			setObjectData(data);
+			setObjectData({ BuildingPartData: data, questId: questId });
 			// createObject(userId, data);
 			const historyData = await getChatHistory();
 			if (Array.isArray(historyData)) {
@@ -60,7 +62,10 @@ export default function Chat() {
 									width={66}
 									height={66}
 								/>
-								<div>{JSON.parse(item.parts?.[0]?.text ?? "{}").chat}</div>
+								<div>
+									{JSON.parse(item.parts?.[0]?.text ?? "{}").chat ||
+										"エラーが発生しました"}
+								</div>
 							</div>
 						) : (
 							<div

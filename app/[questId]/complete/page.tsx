@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Home } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import R3fCanvas from "../r3fCanvas";
 
 export default async function CompletePage() {
 	const supabase = createClient();
@@ -28,13 +29,14 @@ export default async function CompletePage() {
 				</div>
 				<div className="flex gap-12">
 					<div className="bg-white rounded-xl py-8 px-10 w-fit">
-						<Image
+						<R3fCanvas />
+						{/* <Image
 							src={"/house.png"}
 							alt="house"
 							width={260}
 							height={260}
 							className="object-cover block"
-						/>
+						/> */}
 					</div>
 
 					<div className="flex flex-col gap-8 justify-center items-start flex-1">

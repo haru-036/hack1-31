@@ -102,11 +102,14 @@ export default function Town({
 	useEffect(() => {
 		if (selected && buildingData?.parts) {
 			setObjectData({
-				parts: buildingData.parts,
-				position: [selected[0], 0, selected[1]],
+				BuildingPartData: {
+					parts: buildingData.parts,
+					position: [selected[0], 0, selected[1]],
+				},
+				questId: questId?.toString() || "",
 			});
 		}
-	}, [selected, buildingData, setObjectData]);
+	}, [selected, buildingData, setObjectData, questId]);
 
 	const SIZE = 10;
 

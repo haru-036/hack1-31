@@ -2,8 +2,11 @@ import type { BuildingPartData } from "@/app/[questId]/r3fCanvas";
 import { create } from "zustand";
 
 type ObjectStore = {
-	objectData: BuildingPartData | null;
-	setObjectData: (data: BuildingPartData) => void;
+	objectData: { BuildingPartData: BuildingPartData; questId: string } | null;
+	setObjectData: (data: {
+		BuildingPartData: BuildingPartData;
+		questId: string;
+	} | null) => void;
 };
 
 export const useObjectStore = create<ObjectStore>((set) => ({

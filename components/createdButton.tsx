@@ -16,7 +16,11 @@ export default function CreatedButton() {
 
 	const handleClick = () => {
 		startTransition(async () => {
-			await createObjectParts(userId, questId.toString(), data);
+			await createObjectParts(
+				userId,
+				questId.toString(),
+				data.BuildingPartData,
+			);
 			router.push(`/${questId}/set`);
 		});
 	};
