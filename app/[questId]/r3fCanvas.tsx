@@ -83,7 +83,7 @@ export function Buildings({
 }) {
 	return (
 		<group>
-			{buildingData.parts.map((part, i) => (
+			{buildingData.parts?.map((part, i) => (
 				<BuildingPart
 					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					key={i}
