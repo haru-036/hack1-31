@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { createClient } from "@/lib/supabase/client";
 import { Home } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import R3fCanvas from "../r3fCanvas";
+import Name from "./name";
 
 export default async function CompletePage() {
 	const supabase = createClient();
@@ -19,7 +19,7 @@ export default async function CompletePage() {
 		<div className="w-full min-h-[calc(100vh-56px)] grid place-items-center bg-neutral-50 py-6">
 			<div className="max-w-6xl grid w-full px-18 py-16 rounded-3xl gap-16 bg-blue-50 shadow-lg shadow-black/5">
 				<div className="flex flex-row gap-2 items-center justify-between">
-					<h2 className="font-bold text-3xl">やったね！おうちができたよ！🎉</h2>
+					<Name />
 					<Button asChild size={"lg"}>
 						<Link href="/">
 							<Home />
