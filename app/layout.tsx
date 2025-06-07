@@ -17,6 +17,26 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	title: "BuildCha",
 	description: "話して、作ろう。自分だけのまち。",
+	openGraph: {
+		title: "BuildCha",
+		description: "話して、作ろう。自分だけのまち。",
+		type: "website",
+		locale: "ja_JP",
+		images: [
+			{
+				url: "/ogp.png",
+				width: 1200,
+				height: 630,
+				alt: "BuildCha",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "BuildCha",
+		description: "話して、作ろう。自分だけのまち。",
+		images: ["/ogp.png"],
+	},
 };
 
 export default function RootLayout({
