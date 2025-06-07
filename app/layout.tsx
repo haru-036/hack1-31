@@ -20,22 +20,10 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "BuildCha",
 		description: "話して、作ろう。自分だけのまち。",
-		type: "website",
+		url: "https://buildcha.vercel.app/",
+		siteName: "BuildCha",
 		locale: "ja_JP",
-		images: [
-			{
-				url: "/ogp.png",
-				width: 1200,
-				height: 630,
-				alt: "BuildCha",
-			},
-		],
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "BuildCha",
-		description: "話して、作ろう。自分だけのまち。",
-		images: ["/ogp.png"],
+		type: "website",
 	},
 };
 
