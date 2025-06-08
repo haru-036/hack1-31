@@ -1,0 +1,8 @@
+{
+	"type": "building",
+	"name": "ピンクのカフェ",
+	"emoji": "☕️",
+	"color": "#FFC0CB",
+	"size": [2, 1, 1],
+	"description": "明るいピンク色のかわいいカフェ。大きなガラス窓がついています。"
+}

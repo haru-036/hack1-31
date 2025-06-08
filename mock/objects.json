@@ -1,0 +1,67 @@
+{
+	"parts": [
+		{
+			"type": "floor",
+			"position": [0, 0, 0],
+			"rotation": [0, 0, 0],
+			"color": "#FFFFE0",
+			"size": [4, 0.2, 4]
+		},
+		{
+			"type": "wall",
+			"position": [0, 1.5, -2],
+			"rotation": [0, 0, 0],
+			"color": "#FFFFE0",
+			"size": [4, 3, 0.2]
+		},
+		{
+			"type": "wall",
+			"position": [0, 1.5, 2],
+			"rotation": [0, 0, 0],
+			"color": "#FFFFE0",
+			"size": [4, 3, 0.2]
+		},
+		{
+			"type": "wall",
+			"position": [-2, 1.5, 0],
+			"rotation": [0, 1.5708, 0],
+			"color": "#FFFFE0",
+			"size": [4, 3, 0.2]
+		},
+		{
+			"type": "wall",
+			"position": [2, 1.5, 0],
+			"rotation": [0, 1.5708, 0],
+			"color": "#FFFFE0",
+			"size": [4, 3, 0.2]
+		},
+		{
+			"type": "wall",
+			"position": [0, 4.118033988749895, 1],
+			"rotation": [-0.8410686705679302, 0, 0],
+			"color": "#FF69B4",
+			"size": [4, 3, 0.2]
+		},
+		{
+			"type": "wall",
+			"position": [0, 4.118033988749895, -1],
+			"rotation": [0.8410686705679302, 0, 0],
+			"color": "#FF69B4",
+			"size": [4, 3, 0.2]
+		},
+		{
+			"type": "triangleWall",
+			"size": [4, 2, 0.1],
+			"position": [-1.89, 3, 0],
+			"rotation": [0, -1.5708, 0],
+			"color": "#FFFFE0"
+		},
+		{
+			"type": "triangleWall",
+			"size": [4, 2, 0.1],
+			"position": [1.89, 3, 0],
+			"rotation": [0, 1.5708, 0],
+			"color": "#FFFFE0"
+		}
+	]
+}
