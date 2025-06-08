@@ -4,6 +4,19 @@ import Town from "@/components/town";
 import { createClient } from "@/lib/supabase/client";
 import Image from "next/image";
 
+export const metadata = {
+	title: "BuildCha",
+	description: "話して、作ろう。自分だけのまち。",
+	openGraph: {
+		title: "BuildCha",
+		description: "話して、作ろう。自分だけのまち。",
+		url: "https://buildcha.vercel.app/",
+		siteName: "BuildCha",
+		locale: "ja_JP",
+		type: "website",
+	},
+};
+
 export default async function Home() {
 	const supabase = createClient();
 	const { data: quests } = await supabase
