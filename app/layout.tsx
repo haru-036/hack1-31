@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://buildcha.vercel.app"),
 	title: "BuildCha",
 	description: "話して、作ろう。自分だけのまち。",
 	openGraph: {
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
 		type: "website",
 		images: [
 			{
-				url: "https://buildcha.vercel.app/opengraph-image.png",
+				url: "/opengraph-image.png",
 				width: 1200,
 				height: 630,
 				alt: "BuildCha",
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: "BuildCha",
 		description: "話して、作ろう。自分だけのまち。",
-		images: ["https://buildcha.vercel.app/opengraph-image.png"],
+		images: ["/opengraph-image.png"],
 	},
 };
 
