@@ -1,20 +1,11 @@
 "use client";
 import { UserIdContext } from "@/components/appWrapper";
 import { useObjectStore } from "@/lib/store";
-import { OrbitControls, Text } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useParams } from "next/navigation";
 import { useContext, useMemo } from "react";
 import * as THREE from "three";
-
-export type Data = {
-	type: string;
-	name: string;
-	emoji: string;
-	color: string;
-	size: [number, number, number];
-	description: string;
-};
 
 export type BuildingPartData = {
 	id?: string;
@@ -97,7 +88,6 @@ export function Buildings({
 		</group>
 	);
 }
-// const mock: BuildingPartData = data;
 
 export default function R3fCanvas() {
 	const data = useObjectStore((state) => state.objectData);
@@ -121,12 +111,12 @@ export default function R3fCanvas() {
 		<>
 			{data ? (
 				<>
-					<Canvas shadows camera={{ position: [10, 8, 10], fov: 50 }}>
+					<Canvas shadows camera={{ position: [10, 6, 10], fov: 50 }}>
 						<ambientLight intensity={1.6} />
 						<directionalLight position={[5, 10, 5]} intensity={2} castShadow />
 
-						<group position={[0, -2, 0]}>{Object3D}</group>
-						<OrbitControls position0={[0, 5, 0]} />
+						<group position={[0, -1, 0]}>{Object3D}</group>
+						<OrbitControls />
 					</Canvas>
 				</>
 			) : (
@@ -137,34 +127,3 @@ export default function R3fCanvas() {
 		</>
 	);
 }
-
-export const Building = ({
-	size,
-	color,
-	emoji,
-	position = [0, 0, 0],
-}: {
-	size: [number, number, number];
-	color: string;
-	emoji: string;
-	position?: [number, number, number];
-}) => {
-	return (
-		<group position={[position[0], position[1] - 0.05, position[2]]}>
-			<mesh position={[0, 0, 0]} castShadow receiveShadow>
-				<boxGeometry args={[size[0] - 0.1, size[1] - 0.1, size[2] - 0.1]} />
-				<meshLambertMaterial color={color} />
-			</mesh>
-			<Text
-				position={[0, 0, size[2] / 2 - 0.04]}
-				rotation={[0, 0, 0]}
-				fontSize={0.5}
-				color="black"
-				anchorX="center"
-				anchorY="middle"
-			>
-				{emoji}
-			</Text>
-		</group>
-	);
-};
