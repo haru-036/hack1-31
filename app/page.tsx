@@ -36,7 +36,7 @@ export default async function Home() {
 					</div>
 					<Town />
 				</div>
-				<div className="w-full flex-1/3 overflow-x-scroll">
+				<div className="w-full flex-1/3 overflow-x-auto">
 					<h2 className="text-xl xl:text-2xl font-bold px-4">最初におすすめ</h2>
 					<div
 						className="grid gap-3 xl:gap-6 px-4 py-2 xl:py-4 grid-cols-1 auto-rows-max overflow-y-auto"
