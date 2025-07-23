@@ -18,28 +18,6 @@ export async function createUser(userId: string) {
 	return data;
 }
 
-export async function createObject(
-	userId: string,
-	data: {
-		type: string;
-		name?: string;
-		color?: string;
-		size?: number[];
-		position?: number[];
-		emoji?: string;
-		description?: string;
-	},
-) {
-	const { error } = await supabase.from("objects").insert({
-		user_id: userId,
-		...data,
-	});
-
-	if (error) {
-		throw new Error(error.message);
-	}
-}
-
 export async function createObjectParts(
 	userId: string,
 	questId: string,

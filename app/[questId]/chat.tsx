@@ -15,6 +15,7 @@ export default function Chat() {
 	const [message, setMessage] = useState("");
 	const setObjectData = useObjectStore((state) => state.setObjectData);
 	const [isPending, startTransition] = useTransition();
+	const [error, setError] = useState<string | null>(null);
 	const [history, setHistory] = useState<Content[]>([]);
 	const userId = useContext(UserIdContext);
 	const { questId } = useParams<{ questId: string }>();
@@ -24,23 +25,43 @@ export default function Chat() {
 		if (message.trim() === "") return;
 		setHistory([...history, { role: "user", parts: [{ text: message }] }]);
 		startTransition(async () => {
-			const data = await create3DChat(message);
-			console.log(data);
-			setObjectData({ BuildingPartData: data, questId: questId });
-			// createObject(userId, data);
-			const historyData = await getChatHistory();
-			if (Array.isArray(historyData)) {
-				setHistory(historyData);
+			try {
+				const data = await create3DChat(message);
+				console.log(data);
+				setObjectData({ BuildingPartData: data, questId: questId });
+				// createObject(userId, data);
+				const historyData = await getChatHistory();
+				if (Array.isArray(historyData)) {
+					setHistory(historyData);
+				}
+				setMessage("");
+			} catch (error) {
+				console.error("Error creating 3D data:", error);
+				setError("3Dデータの作成に失敗しました。");
 			}
-			setMessage("");
 		});
 	};
 
 	return (
 		<>
-			<ScrollArea className="h-full overflow-y-auto py-5">
+			<ScrollArea
+				className="h-full overflow-y-auto py-5"
+				ref={(scrollArea) => {
+					if (scrollArea && (history.length > 0 || isPending)) {
+						const scrollContainer = scrollArea.querySelector(
+							"[data-radix-scroll-area-viewport]",
+						);
+						if (scrollContainer) {
+							scrollContainer.scrollTo({
+								top: scrollContainer.scrollHeight,
+								behavior: "smooth",
+							});
+						}
+					}
+				}}
+			>
 				<div className="grow flex flex-col justify-start gap-6">
-					<div className="flex items-center gap-4 max-w-2/3">
+					<div className="flex items-center gap-4 max-w-3/4 xl:max-w-2/3">
 						<Image
 							src={"/AICharacter.png"}
 							alt="AICharacter"
@@ -54,7 +75,7 @@ export default function Chat() {
 						item.role === "model" ? (
 							<div
 								key={`${item.role}-${index}`}
-								className="flex items-center gap-4 max-w-2/3"
+								className="flex items-center gap-4 max-w-3/4 xl:max-w-2/3"
 							>
 								<Image
 									src={"/AICharacter.png"}
@@ -63,14 +84,19 @@ export default function Chat() {
 									height={66}
 								/>
 								<div>
-									{JSON.parse(item.parts?.[0]?.text ?? "{}").chat ||
-										"エラーが発生しました"}
+									{error ? (
+										<span className="text-red-500">{error}</span>
+									) : JSON.parse(item.parts?.[0]?.text ?? "{}").chat ? (
+										JSON.parse(item.parts?.[0]?.text ?? "{}").chat
+									) : (
+										""
+									)}
 								</div>
 							</div>
 						) : (
 							<div
 								key={`${item.role}-${index}`}
-								className="bg-neutral-100 py-2.5 px-3 rounded-md w-fit self-end max-w-2/3 whitespace-pre-wrap"
+								className="bg-neutral-100 py-2.5 px-3 rounded-md w-fit self-end max-w-3/4 xl:max-w-2/3 whitespace-pre-wrap"
 							>
 								{item.parts?.[0]?.text ?? ""}
 							</div>
@@ -95,7 +121,7 @@ export default function Chat() {
 			<div className="relative">
 				<Textarea
 					placeholder="おおきい おしろみたいな いえ"
-					className="bg-neutral-100 border-none p-6 resize-none rounded-xl pr-16"
+					className="bg-neutral-100 border-none p-5 xl:p-6 resize-none rounded-xl pr-16"
 					value={message}
 					onChange={(e) => setMessage(e.target.value)}
 					disabled={isPending}

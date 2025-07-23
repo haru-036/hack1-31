@@ -27,7 +27,7 @@ export default function CreatedButton() {
 
 	return (
 		<Button
-			className="w-fit self-end font-bold mt-4"
+			className="w-fit font-bold"
 			onClick={handleClick}
 			disabled={isPending}
 		>
