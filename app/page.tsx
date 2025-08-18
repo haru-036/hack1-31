@@ -46,7 +46,7 @@ export default async function Home() {
 						<div
 							className="grid gap-3 xl:gap-6 px-4 py-2 xl:py-4 grid-cols-1 auto-rows-max overflow-y-auto"
 							style={{
-								gridTemplateColumns: "repeat(2, minmax(250px, 1fr))",
+								gridTemplateColumns: "repeat(2, minmax(200px, 1fr))",
 								maxHeight: "calc(100vh - 124px)",
 							}}
 						>

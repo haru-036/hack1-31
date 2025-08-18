@@ -42,7 +42,7 @@ export default function ObjectCard({
 	return (
 		<Link
 			className={cn(
-				"bg-white rounded-2xl p-2.5 h-fit relative transition-shadow",
+				"bg-white rounded-2xl p-3 h-full relative transition-shadow flex flex-col justify-between gap-3",
 				possible
 					? " hover:cursor-pointer hover:outline-4 hover:outline-primary/50 hover:scale-105 transition-all"
 					: "shadow-none",
@@ -59,7 +59,7 @@ export default function ObjectCard({
 				<DifficultyBadge difficulty={difficulty} />
 				{/* <p className="text-xs font-bold">{masu}マス</p> */}
 			</div>
-			<div className="w-full pt-3">
+			<div className="w-full">
 				<Image
 					src={image || "/house.png"}
 					alt="house"
@@ -68,9 +68,7 @@ export default function ObjectCard({
 					height={84}
 				/>
 			</div>
-			<div className="flex items-center gap-2 py-2 px-1 text-base font-bold text-muted-foreground">
-				{name} <ChevronRight className="size-6" />
-			</div>
+			<div className="text-sm">{name}</div>
 		</Link>
 	);
 }
