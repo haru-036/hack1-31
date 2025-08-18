@@ -1,16 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import AppWrapper from "@/components/appWrapper";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+const LINESeedJP = localFont({
+	src: [
+		{
+			path: "../fonts/LINESeedJP_OTF_Th.woff2",
+			weight: "200",
+			style: "thin",
+		},
+		{
+			path: "../fonts/LINESeedJP_OTF_Rg.woff2",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../fonts/LINESeedJP_OTF_Bd.woff2",
+			weight: "700",
+			style: "bold",
+		},
+		{
+			path: "../fonts/LINESeedJP_OTF_Eb.woff2",
+			weight: "900",
+			style: "extrabold",
+		},
+	],
+	display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -49,9 +65,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ja">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
-			>
+			<body className={`${LINESeedJP.className} antialiased min-h-screen`}>
 				<AppWrapper>
 					<main>{children}</main>
 				</AppWrapper>
