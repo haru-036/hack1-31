@@ -65,8 +65,8 @@ export default function Chat() {
 						<Image
 							src={"/AICharacter.png"}
 							alt="AICharacter"
-							width={66}
-							height={66}
+							width={56}
+							height={56}
 						/>
 						<div>何を作るのかな？どんな形にしたい？</div>
 					</div>
@@ -80,8 +80,8 @@ export default function Chat() {
 								<Image
 									src={"/AICharacter.png"}
 									alt="AICharacter"
-									width={66}
-									height={66}
+									width={56}
+									height={56}
 								/>
 								<div>
 									{error ? (
