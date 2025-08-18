@@ -12,10 +12,11 @@ export default function CreatedButton() {
 	const router = useRouter();
 	const { questId } = useParams();
 	const [isPending, startTransition] = useTransition();
-	if (!userId || !data || !questId) return null;
+	if (!userId || !questId) return null;
 
 	const handleClick = () => {
 		startTransition(async () => {
+			if (!data) return;
 			await createObjectParts(
 				userId,
 				questId.toString(),
@@ -28,10 +29,11 @@ export default function CreatedButton() {
 	return (
 		<Button
 			className="w-fit font-bold"
+			size={"lg"}
 			onClick={handleClick}
-			disabled={isPending}
+			disabled={isPending || !data}
 		>
-			できた！
+			置く場所を決める
 		</Button>
 	);
 }

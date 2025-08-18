@@ -12,11 +12,11 @@ export default function SetedButton() {
 	const router = useRouter();
 	const { questId } = useParams();
 	const [isPending, startTransition] = useTransition();
-	if (!userId || !data || !questId) return null;
+	if (!userId || !questId) return null;
 
 	const handleClick = () => {
 		startTransition(async () => {
-			if (!data.BuildingPartData.position) return;
+			if (!data || !data.BuildingPartData.position) return;
 			await updateObjectParts(
 				userId,
 				questId.toString(),
@@ -29,6 +29,7 @@ export default function SetedButton() {
 	return (
 		<Button
 			className="w-fit self-end font-bold mt-4"
+			size={"lg"}
 			onClick={handleClick}
 			disabled={isPending}
 		>
