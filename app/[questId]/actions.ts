@@ -4,7 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 // APIキーを環境変数から取得
 const API_KEY = process.env.GEMINI_API_KEY;
 if (!API_KEY) {
-  throw new Error("GEMINI_API_KEY is not set in environment variables.");
+	throw new Error("GEMINI_API_KEY is not set in environment variables.");
 }
 const ai = new GoogleGenAI({ apiKey: API_KEY });
 const systemInstruction = `# 3D建物生成システムプロンプト
@@ -175,32 +175,32 @@ const systemInstruction = `# 3D建物生成システムプロンプト
 必ずJSONフォーマットでのみ回答してください。`;
 
 const chat = ai.chats.create({
-  model: "gemini-2.5-flash-preview-05-20",
-  config: {
-    systemInstruction: systemInstruction,
-    responseMimeType: "application/json",
-  },
+	model: "gemini-2.5-flash",
+	config: {
+		systemInstruction: systemInstruction,
+		responseMimeType: "application/json",
+	},
 });
 
 export async function create3DChat(message: string) {
-  try {
-    const response = await chat.sendMessage({
-      message: message,
-    });
-    const data = JSON.parse(response.text ?? "{}");
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to create 3D data");
-  }
+	try {
+		const response = await chat.sendMessage({
+			message: message,
+		});
+		const data = JSON.parse(response.text ?? "{}");
+		return data;
+	} catch (error) {
+		console.error(error);
+		throw new Error("Failed to create 3D data");
+	}
 }
 
 export async function getChatHistory() {
-  try {
-    const history = chat.getHistory();
-    return history;
-  } catch (error) {
-    console.error(error);
-    throw new Error("Failed to get chat history");
-  }
+	try {
+		const history = chat.getHistory();
+		return history;
+	} catch (error) {
+		console.error(error);
+		throw new Error("Failed to get chat history");
+	}
 }
